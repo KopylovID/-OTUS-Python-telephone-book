@@ -16,7 +16,7 @@ class TelephoneBook:
 
         self.menu:Menu = Menu([
             FileOpen(self.data),
-            FileSave(),
+            FileSave(self.data),
             ContactShow(self.data),
             ContactCreate(self.data),
             ContactFind(),

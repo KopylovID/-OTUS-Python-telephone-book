@@ -1,8 +1,11 @@
+import logging
 from typing import Dict
 
 from command.Command import Command
 from common.data import Data
 from common.function import show
+
+LOG = logging.getLogger(__name__)
 
 
 class ContactShow(Command):
@@ -12,6 +15,7 @@ class ContactShow(Command):
         self.data: Data = data
 
     def execute(self) -> str:
+        LOG.debug(f'Запуск команды {self.description}')
         data: Dict = dict(self.data.data)
         template = '''id={id}, name={name}, phone={phone}, comment={comment}\n'''
         result = 'Список контактов:\n'

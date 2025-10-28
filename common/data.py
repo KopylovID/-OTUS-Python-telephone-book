@@ -14,6 +14,7 @@ class Data:
     @data.setter
     def data(self, data):
         self.__data = data
+        if self.__data: __data_seq = max(self.__data.keys())
 
     def __str__(self):
         return json.dumps(self.data, ensure_ascii=False)

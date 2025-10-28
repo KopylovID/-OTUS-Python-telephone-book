@@ -1,7 +1,10 @@
+import logging
 from typing import List
 from command.Command import Command
 from common.tb_exception import NoCommand
 from common.function import show
+
+LOG = logging.getLogger(__name__)
 
 
 class Menu:
@@ -20,8 +23,9 @@ class Menu:
         while number == 0:
             try:
                 number = int(input("Введите номер пункта меню: "))
-            except (TypeError, ValueError):
+            except (TypeError, ValueError) as exc:
                 show('Ожидалось числовое значение!')
+                LOG.exception(exc, exc_info=True)
         return number
 
     def execute(self, ixd:int = 0):
