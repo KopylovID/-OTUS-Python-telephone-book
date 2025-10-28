@@ -1,29 +1,12 @@
-import logging
 import logging.config
 
 logging.config.fileConfig('logging.conf')
 LOG = logging.getLogger(__name__)
 
-from telephone_book import TelephoneBook
-from tb_exception import NoCommand, StopProcessing
+from telephone_book.telephone_book import TelephoneBook
+from common.tb_exception import NoCommand, StopProcessing
 
-
-def show(message:str):
-    '''Предназначена для отображения сообщений пользователю'''
-    print(message)
-
-
-def get_input() -> int:
-    '''Предназначена для получения пункта меню от пользователя'''
-    number = 0
-
-    while number == 0:
-        try:
-            number = int(input("Введите номер пункта меню: "))
-        except TypeError:
-            show('Ожидалось числовое значение!')
-    return number
-
+from common.function import show
 
 if __name__ == '__main__':
     LOG.debug('Запуск')
@@ -38,10 +21,10 @@ if __name__ == '__main__':
         LOG.debug('Обработка')
         try:
             LOG.debug('Получаем номер пункта меню')
-            item = get_input()
+            tb.get_menu_input()
 
             LOG.debug('Выполняем комманду')
-            tb.item_execute(item)
+            tb.item_execute()
         except NoCommand as exc:
             show(exc)
             continue
