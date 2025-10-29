@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 from pathlib import Path
 
 from command.Command import Command
@@ -22,12 +21,17 @@ class FileOpen(Command):
         file_path = None
 
         try:
-            __path = Path(get_input('Введите полный путь к файлу: '))
-            if __path == '': __path = './temp/tb.json'
-            if not file_path.is_file():
+            default_path = r'./temp/tb.json'
+            path = get_input(f'Введите полный путь к файлу (нажмите Enter для значения по умолчанию: {default_path}): ')
+
+            if path is None or path == '': path = default_path
+            path = Path(path)
+
+            if not path.is_file():
                 raise FileExistsError('Указанный путь не является файлом')
-            elif not file_path.exists():
+            elif not path.exists():
                 raise FileNotFoundError('Файл по указанному пути не существует')
+
         except (FileExistsError, FileNotFoundError) as exc:
             show(str(exc))
             LOG.exception(exc, exc_info=True)
@@ -35,7 +39,7 @@ class FileOpen(Command):
             show('Неизвестная ошибка! - просьба обратится в поддержку')
             LOG.exception(exc, exc_info=True)
         else:
-            file_path = str(__path)
+            file_path = str(path)
 
         return file_path
 
@@ -44,8 +48,10 @@ class FileOpen(Command):
         file_path = self.get_params()
         if file_path is not None:
             try:
-                with os.open(file_path, mode='r', encoding='utf-8') as file:
-                    self.data = json.load(file)
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    self.data.data = json.load(file)
             except Exception as exc:
                 show('Неизвестная ошибка при открытии файла! - просьба обратится в поддержку')
                 LOG.exception(exc, exc_info=True)
+            else:
+                show(f'Файл {Path(file_path).name} успешно загружен')
