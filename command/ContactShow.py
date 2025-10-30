@@ -24,6 +24,6 @@ class ContactShow(Command):
                 id=key,
                 name=value.get('name'),
                 phone=value.get('phone'),
-                comment=value.get('comment')
+                comment=value.get('note')
             )
         show(result.rstrip('\n'))

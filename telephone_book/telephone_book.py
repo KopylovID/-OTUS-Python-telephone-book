@@ -1,8 +1,8 @@
 import logging
-from menu.menu import Menu
-from command import *
 
+from command import *
 from common.data import Data
+from menu.menu import Menu
 
 LOG = logging.getLogger(__name__)
 
@@ -19,9 +19,9 @@ class TelephoneBook:
             FileSave(self.data),
             ContactShow(self.data),
             ContactCreate(self.data),
-            ContactFind(),
-            ContactModify(),
-            ContactDelete(),
+            ContactFind(self.data),
+            ContactModify(self.data),
+            ContactDelete(self.data),
             Exit()
         ])
         self.menu_index = 1
