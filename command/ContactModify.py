@@ -10,12 +10,18 @@ from common.function import get_input, show
 LOG = logging.getLogger(__name__)
 
 class ContactModify(Command):
+    """Команда: Изменение контакта"""
+
     description = 'изменить контакт'
 
     def __init__(self, data: Data):
         self.data: Data = data
 
     def get_params(self) -> Tuple[str, Contact]:
+        """
+        Получение параметров. Получение ИД контакта по которому требуется внести изменение
+        :return: Contact()
+        """
         contact = Contact()
         try:
             id = str(get_input('Введите ИД изменяемого контакта: '))
@@ -44,6 +50,10 @@ class ContactModify(Command):
         return id, contact
 
     def execute(self):
+        """
+        Исполнение. Изменение контакта
+        :return: None
+        """
         LOG.debug(f'Запуск команды {self.description}')
         id, contact = self.get_params()
         if id != '':

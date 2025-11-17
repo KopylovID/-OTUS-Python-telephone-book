@@ -8,27 +8,38 @@ from common.function import get_input, show
 
 LOG = logging.getLogger(__name__)
 
+
 class ContactCreate(Command):
-    description = 'создать контакт'
+    """Команда: Создание контакта"""
+
+    description = "создать контакт"
 
     def __init__(self, data: Data):
         self.data: Data = data
 
     def get_params(self) -> Contact:
+        """
+        Получение параметров. Получение параметров контакта от пользователя
+        :return: Contact()
+        """
         contact = Contact()
         try:
-            contact.name = get_input('Введите Имя: ')
-            contact.phone = get_input('Введите Фелефон: ')
-            contact.note = get_input('Введите Комментарий: ')
+            contact.name = get_input("Введите Имя: ")
+            contact.phone = get_input("Введите Фелефон: ")
+            contact.note = get_input("Введите Комментарий: ")
         except Exception as exc:
-            show('Неизвестная ошибка при заведении полей! - просьба обратится в поддержку')
+            show("Неизвестная ошибка при заведении полей! - просьба обратится в поддержку")
             LOG.exception(exc, exc_info=True)
         return contact
 
     def execute(self) -> None:
-        LOG.debug(f'Запуск команды {self.description}')
+        """
+        Исполнение. Создание контакта
+        :return: None
+        """
+        LOG.debug(f"Запуск команды {self.description}")
         contact = self.get_params()
         if contact.is_active:
-            show(f'Добавлен контакт ИД: {self.data.insert(asdict(contact))}')
+            show(f"Добавлен контакт ИД: {self.data.insert(asdict(contact))}")
         else:
-            show('Контакт не содержит данных - добавление отменено!')
+            show("Контакт не содержит данных - добавление отменено!")

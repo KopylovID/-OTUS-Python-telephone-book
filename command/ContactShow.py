@@ -9,21 +9,28 @@ LOG = logging.getLogger(__name__)
 
 
 class ContactShow(Command):
-    description = 'показать все контакты'
+    """Команда: Отображение всех контактов"""
+
+    description = "показать все контакты"
 
     def __init__(self, data: Data):
         self.data: Data = data
 
     def execute(self) -> str:
-        LOG.debug(f'Запуск команды {self.description}')
+        """
+        Исполнение. Отображение контактов
+        :return: None
+        """
+
+        LOG.debug(f"Запуск команды {self.description}")
         data: Dict = dict(self.data.data)
-        template = '''id={id}, name={name}, phone={phone}, comment={comment}\n'''
-        result = 'Список контактов:\n'
+        template = """id={id}, name={name}, phone={phone}, comment={comment}\n"""
+        result = "Список контактов:\n"
         for key, value in data.items():
             result += template.format(
                 id=key,
-                name=value.get('name'),
-                phone=value.get('phone'),
-                comment=value.get('note')
+                name=value.get("name"),
+                phone=value.get("phone"),
+                comment=value.get("note")
             )
-        show(result.rstrip('\n'))
+        show(result.rstrip("\n"))

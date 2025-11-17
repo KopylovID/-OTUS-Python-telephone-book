@@ -7,6 +7,7 @@ from menu.menu import Menu
 LOG = logging.getLogger(__name__)
 
 class TelephoneBook:
+    """Телефонный справочник"""
 
     __version: str = '0.0.0'
 
@@ -27,12 +28,15 @@ class TelephoneBook:
         self.menu_index = 1
 
     def get_menu(self) -> str:
+        """Функция получения меню"""
         return str(self.menu)
 
     def get_menu_input(self) -> None:
+        """Функция получения выбранного пункта меню"""
         self.menu_index = self.menu.get_input()
 
     def item_execute(self):
+        """Функция выполнения команды"""
         self.menu.execute(self.menu_index)
 
 
