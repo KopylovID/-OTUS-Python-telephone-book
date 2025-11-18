@@ -1,18 +1,14 @@
-2025-11-18 01:00:53 - __main__ - DEBUG - Запуск
-2025-11-18 01:00:53 - __main__ - DEBUG - Создаем телефонный справочник
-2025-11-18 01:00:53 - telephone_book.telephone_book - DEBUG - Телефонный справочник - Версия 0.0.0
-2025-11-18 01:00:53 - telephone_book.telephone_book - DEBUG - Отображаем меню
-2025-11-18 01:00:53 - telephone_book.telephone_book - DEBUG - Обработка
-2025-11-18 01:00:53 - telephone_book.telephone_book - DEBUG - Получаем номер пункта меню и сохраняем индекс команды
-2025-11-18 01:00:58 - telephone_book.telephone_book - DEBUG - Выполняем комманду по индексу
-2025-11-18 01:00:58 - command.FileOpen - DEBUG - Запуск команды открыть файл
-2025-11-18 01:00:59 - telephone_book.telephone_book - DEBUG - Отображаем меню
-2025-11-18 01:00:59 - telephone_book.telephone_book - DEBUG - Обработка
-2025-11-18 01:00:59 - telephone_book.telephone_book - DEBUG - Получаем номер пункта меню и сохраняем индекс команды
-2025-11-18 01:01:02 - telephone_book.telephone_book - DEBUG - Выполняем комманду по индексу
-2025-11-18 01:01:02 - command.ContactShow - DEBUG - Запуск команды показать все контакты
-2025-11-18 01:01:02 - telephone_book.telephone_book - DEBUG - Отображаем меню
-2025-11-18 01:01:02 - telephone_book.telephone_book - DEBUG - Обработка
-2025-11-18 01:01:02 - telephone_book.telephone_book - DEBUG - Получаем номер пункта меню и сохраняем индекс команды
-2025-11-18 01:01:05 - telephone_book.telephone_book - DEBUG - Выполняем комманду по индексу
-2025-11-18 01:01:05 - __main__ - DEBUG - Завершение
+2025-11-19 00:15:42 - __main__ - DEBUG - Запуск
+2025-11-19 00:15:42 - __main__ - DEBUG - Создаем телефонный справочник
+2025-11-19 00:15:42 - telephone_book.telephone_book - DEBUG - Телефонный справочник - Версия 0.0.0
+2025-11-19 00:15:42 - menu.menu - DEBUG - Отображаем меню
+2025-11-19 00:15:42 - menu.menu - DEBUG - Выбираенм пункт меню и сохраняем индекс команды
+2025-11-19 00:15:44 - menu.menu - DEBUG - Выполняем команду по индексу
+2025-11-19 00:15:44 - command.file_open - DEBUG - Запуск команды открыть файл
+2025-11-19 00:15:45 - menu.menu - DEBUG - Отображаем меню
+2025-11-19 00:15:45 - menu.menu - DEBUG - Выбираенм пункт меню и сохраняем индекс команды
+2025-11-19 00:15:46 - menu.menu - DEBUG - Выполняем команду по индексу
+2025-11-19 00:15:46 - command.contact_show - DEBUG - Запуск команды показать все контакты
+2025-11-19 00:15:46 - menu.menu - DEBUG - Отображаем меню
+2025-11-19 00:15:46 - menu.menu - DEBUG - Выбираенм пункт меню и сохраняем индекс команды
+2025-11-19 00:15:48 - __main__ - DEBUG - Завершение

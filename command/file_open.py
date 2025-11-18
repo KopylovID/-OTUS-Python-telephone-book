@@ -2,7 +2,7 @@ import json
 import logging
 from pathlib import Path
 
-from command.Command import Command
+from command.command import Command
 from common.data import Data
 from common.function import get_input, show
 

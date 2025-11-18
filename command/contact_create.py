@@ -1,7 +1,7 @@
 import logging
 from dataclasses import asdict
 
-from command.Command import Command
+from command.command import Command
 from common.contact import Contact
 from common.data import Data
 from common.function import get_input, show

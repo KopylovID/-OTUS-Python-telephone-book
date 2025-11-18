@@ -1,7 +1,7 @@
 import logging
 from typing import Dict
 
-from command.Command import Command
+from command.command import Command
 from common.data import Data
 from common.function import show
 

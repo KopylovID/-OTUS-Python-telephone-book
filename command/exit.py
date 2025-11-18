@@ -1,4 +1,4 @@
-from command.Command import Command
+from command.command import Command
 
 
 class Exit(Command):

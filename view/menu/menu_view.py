@@ -1,16 +1,13 @@
 import logging
-from common.function import show
 from typing import List
+from view.view import View
 
 LOG = logging.getLogger(__name__)
 
 
-class TelephoneBookView:
+class MenuView(View):
 
-    def show(self, data):
-        show(data)
-
-    def get_menu_input(self) -> int:
+    def get_menu_item(self):
         """Предназначена для получения пункта меню от пользователя"""
         number = 0
 
@@ -20,6 +17,7 @@ class TelephoneBookView:
             except (TypeError, ValueError) as exc:
                 self.show("Ожидалось числовое значение!")
                 LOG.exception(exc, exc_info=True)
+
         return number
 
     def show_menu(self, command_list: List[str]):

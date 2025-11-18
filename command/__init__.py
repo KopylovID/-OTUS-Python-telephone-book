@@ -1,11 +1,11 @@
-from command.ContactCreate import ContactCreate
-from command.ContactDelete import ContactDelete
-from command.ContactFind import ContactFind
-from command.ContactModify import ContactModify
-from command.ContactShow import ContactShow
-from command.Exit import Exit
-from command.FileOpen import FileOpen
-from command.FileSave import FileSave
+from command.contact_create import ContactCreate
+from command.contact_delete import ContactDelete
+from command.contact_find import ContactFind
+from command.contact_modify import ContactModify
+from command.contact_show import ContactShow
+from command.exit import Exit
+from command.file_open import FileOpen
+from command.file_save import FileSave
 
 __all__ = [
     "ContactCreate",
