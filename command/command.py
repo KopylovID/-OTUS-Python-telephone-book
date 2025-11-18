@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import json
 
 
 class Command(ABC):
@@ -14,15 +15,8 @@ class Command(ABC):
         """
         return self.description
 
-    def get_params(self):
-        """
-        Получение параметров. Метод получения параметров для выполнения команды
-        :return: Необходимо переопределение. Для каждой команды свой
-        """
-        raise NotImplementedError("Метод получения параметров не определен!")
-
     @abstractmethod
-    def execute(self):
+    def execute(self, params: json = None):
         """
         Исполнение. Метод выполнения команды
         :return: Необходимо переопределение. Для каждой команды свой

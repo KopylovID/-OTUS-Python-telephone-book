@@ -38,13 +38,13 @@ class Menu:
                 LOG.debug("Выполняем команду по индексу")
                 self.execute(self.menu_index)
             except NoCommand as exc:
-                self.menu_view.show(exc)
+                self.menu_view.show(exc) # Не очень хорошо. TODO: отдельный метод обработки в представленнии должен быть
                 continue
             except StopProcessing as exc:
-                self.menu_view.show(exc)
+                self.menu_view.show(exc) # Не очень хорошо. TODO: отдельный метод обработки в представленнии должен быть
                 break
             except NotImplementedError as exc:
-                self.menu_view.show(exc)
+                self.menu_view.show(exc) # Не очень хорошо. TODO: отдельный метод обработки в представленнии должен быть
                 continue
             except Exception as exc:
                 LOG.exception(exc)

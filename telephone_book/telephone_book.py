@@ -21,9 +21,11 @@ class TelephoneBook:
         from menu.menu import Menu
         from view.menu.menu_view import MenuView
 
+        from view.command.file_open_view import FileOpenView
+
         self.menu: Menu = Menu(
             [
-                FileOpen(self.data),
+                FileOpen(self.data, FileOpenView()),
                 FileSave(self.data),
                 ContactShow(self.data),
                 ContactCreate(self.data),
