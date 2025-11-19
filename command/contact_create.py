@@ -2,9 +2,9 @@ import logging
 from dataclasses import asdict
 
 from command.command import Command
-from common.contact import Contact
 from common.data import Data
-from common.function import get_input, show
+from common.tb_exception import NoContactData
+from view.command.contact_create_view import ContactCreateView
 
 LOG = logging.getLogger(__name__)
 
@@ -14,23 +14,9 @@ class ContactCreate(Command):
 
     description = "создать контакт"
 
-    def __init__(self, data: Data):
+    def __init__(self, data: Data, view: ContactCreateView):
         self.data: Data = data
-
-    def get_params(self) -> Contact:
-        """
-        Получение параметров. Получение параметров контакта от пользователя
-        :return: Contact()
-        """
-        contact = Contact()
-        try:
-            contact.name = get_input("Введите Имя: ")
-            contact.phone = get_input("Введите Фелефон: ")
-            contact.note = get_input("Введите Комментарий: ")
-        except Exception as exc:
-            show("Неизвестная ошибка при заведении полей! - просьба обратится в поддержку")
-            LOG.exception(exc, exc_info=True)
-        return contact
+        self.view: ContactCreateView = view
 
     def execute(self) -> None:
         """
@@ -38,8 +24,12 @@ class ContactCreate(Command):
         :return: None
         """
         LOG.debug(f"Запуск команды {self.description}")
-        contact = self.get_params()
-        if contact.is_active:
-            show(f"Добавлен контакт ИД: {self.data.insert(asdict(contact))}")
-        else:
-            show("Контакт не содержит данных - добавление отменено!")
+
+        try:
+            contact = self.view.get_params()
+            if not contact.is_active:
+                raise NoContactData()
+            self.view.succes(self.data.insert(asdict(contact)))
+        except Exception as exc:
+            self.view.error(exc)
+            LOG.exception(exc)

@@ -13,3 +13,10 @@ class StopProcessing(Exception):
 
     def __str__(self):
         return "Завершение обработки"
+
+
+class NoContactData(Exception):
+    """Исключение когда у контакта не заполнены поля"""
+
+    def __str__(self):
+        return "Контакт не содержит данных"

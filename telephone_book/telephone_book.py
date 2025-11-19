@@ -24,13 +24,14 @@ class TelephoneBook:
         from view.command.file_open_view import FileOpenView
         from view.command.file_save_view import FileSaveView
         from view.command.contact_show_view import ContactShowView
+        from view.command.contact_create_view import ContactCreateView
 
         self.menu: Menu = Menu(
             [
                 FileOpen(self.data, FileOpenView()),
                 FileSave(self.data, FileSaveView()),
                 ContactShow(self.data, ContactShowView()),
-                ContactCreate(self.data),
+                ContactCreate(self.data, ContactCreateView()),
                 ContactFind(self.data),
                 ContactModify(self.data),
                 ContactDelete(self.data),
