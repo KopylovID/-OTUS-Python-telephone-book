@@ -25,6 +25,7 @@ class TelephoneBook:
         from view.command.file_save_view import FileSaveView
         from view.command.contact_show_view import ContactShowView
         from view.command.contact_create_view import ContactCreateView
+        from view.command.contact_find_view import ContactFindView
 
         self.menu: Menu = Menu(
             [
@@ -32,7 +33,7 @@ class TelephoneBook:
                 FileSave(self.data, FileSaveView()),
                 ContactShow(self.data, ContactShowView()),
                 ContactCreate(self.data, ContactCreateView()),
-                ContactFind(self.data),
+                ContactFind(self.data, ContactFindView()),
                 ContactModify(self.data),
                 ContactDelete(self.data),
                 Exit(),

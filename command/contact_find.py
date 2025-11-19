@@ -2,9 +2,8 @@ import logging
 from typing import Dict
 
 from command.command import Command
-from common.contact import Contact
 from common.data import Data
-from common.function import get_input, show
+from view.command.contact_find_view import ContactFindView
 
 LOG = logging.getLogger(__name__)
 
@@ -14,8 +13,9 @@ class ContactFind(Command):
 
     description = "найти контакт"
 
-    def __init__(self, data: Data):
+    def __init__(self, data: Data, view: ContactFindView):
         self.data: Data = data
+        self.view: ContactFindView = view
 
     def execute(self):
         """
@@ -23,20 +23,16 @@ class ContactFind(Command):
         :return: None
         """
 
+        # TODO: На данный момент поиск происходит в контроллере, но лучше искать через модель
         LOG.debug(f"Запуск команды {self.description}")
-        name = str(get_input("Введите имя контакта для поиска: "))
+
+        name = self.view.get_params()
         data: Dict = dict()
         for id, contact in self.data.data.items():
             if str(contact["name"]).find(name) != -1:
                 data[id] = contact
 
         if data:
-            template = """id={id}, name={name}, phone={phone}, comment={comment}\n"""
-            result = "Список контактов:\n"
-            for key, value in data.items():
-                result += template.format(
-                    id=key, name=value.get("name"), phone=value.get("phone"), comment=value.get("note")
-                )
-            show(result.rstrip("\n"))
+            self.view.contact_show(data)
         else:
-            show("Поиск не дал результатов!")
+            self.view.error()
