@@ -9,7 +9,7 @@ class NoCommand(Exception):
 
 
 class StopProcessing(Exception):
-    """Исключение - взавершение обработки"""
+    """Исключение - завершение обработки"""
 
     def __str__(self):
         return "Завершение обработки"
@@ -20,3 +20,7 @@ class NoContactData(Exception):
 
     def __str__(self):
         return "Контакт не содержит данных"
+
+class SkipProcessing(Exception):
+    """Исключение для пропуска обработки"""
+    pass

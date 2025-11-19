@@ -1,61 +1,43 @@
 import logging
 from dataclasses import asdict
-from typing import Tuple
 
 from command.command import Command
 from common.contact import Contact
 from common.data import Data
-from common.function import get_input, show
+from common.tb_exception import SkipProcessing
+from view.command.contact_modify_view import ContactModifyView
 
 LOG = logging.getLogger(__name__)
+
 
 class ContactModify(Command):
     """Команда: Изменение контакта"""
 
-    description = 'изменить контакт'
+    description = "изменить контакт"
 
-    def __init__(self, data: Data):
+    def __init__(self, data: Data, view: ContactModifyView):
         self.data: Data = data
-
-    def get_params(self) -> Tuple[str, Contact]:
-        """
-        Получение параметров. Получение ИД контакта по которому требуется внести изменение
-        :return: Contact()
-        """
-        contact = Contact()
-        try:
-            id = str(get_input('Введите ИД изменяемого контакта: '))
-
-            contact = Contact(**dict(self.data.data[id]))
-
-            name = get_input(f'Введите Имя (нажмите Enter, чтобы оставить "{contact.name}" без изменения): ')
-            phone = get_input(f'Введите Фелефон (нажмите Enter, чтобы оставить "{contact.phone}" без изменения): ')
-            note = get_input(f'Введите Комментарий (нажмите Enter, чтобы оставить "{contact.note}" без изменения): ')
-
-            if name != '': contact.name = name
-            if phone != '': contact.phone = phone
-            if note != '': contact.note = note
-
-        except TypeError:
-            show('ИД не является числом!')
-            id = ''
-        except KeyError:
-            show('Не найден указанный контакт')
-            id = ''
-        except Exception as exc:
-            show('Неизвестная ошибка при заведении полей! - просьба обратится в поддержку')
-            id = ''
-            LOG.exception(exc, exc_info=True)
-
-        return id, contact
+        self.view: ContactModifyView = view
+        self.contact_id: str = None
 
     def execute(self):
         """
         Исполнение. Изменение контакта
         :return: None
         """
-        LOG.debug(f'Запуск команды {self.description}')
-        id, contact = self.get_params()
-        if id != '':
-            show(f'Обновлен контакт ИД: {self.data.update(str(id), asdict(contact))} - {contact.name}')
+        LOG.debug(f"Запуск команды {self.description}")
 
+        try:
+            self.contact_id = self.view.get_contact_id()
+            contact = Contact(**dict(self.data.data[self.contact_id]))
+            contact = self.view.get_params(contact)
+            self.data.update(self.contact_id, asdict(contact))
+        except KeyError:
+            self.view.show("Не найден указанный контакт")
+        except SkipProcessing:
+            pass
+        except Exception as exc:
+            self.view.show("Неизвестная ошибка при заведении полей! - просьба обратится в поддержку")
+            LOG.exception(exc, exc_info=True)
+        else:
+            self.view.succes(self.contact_id, contact)
