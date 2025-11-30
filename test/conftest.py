@@ -1,7 +1,6 @@
 import pytest
 
 from common.data import Data
-from typing import Tuple
 from common.contact import Contact
 from dataclasses import asdict
 from test.test_dataset import test_ds
