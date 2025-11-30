@@ -9,7 +9,7 @@ from test.test_dataset import test_ds
 
 class TestData:
 
-    @pytest.mark.part_1
+    @pytest.mark.model
     @pytest.mark.parametrize("test_contact", test_ds)
     def test_insert(self, data_empty: Data, test_contact: Tuple[str, str, str]):
         data = data_empty
@@ -19,7 +19,7 @@ class TestData:
         assert len(data.data) > 0, "Отсутствуют записи!"
         assert Contact(**data.data[contact_id]) == contact, "Созданная запись не равна эталонной!"
 
-    @pytest.mark.part_2
+    @pytest.mark.model
     def test_update(self, data_filled: Data):
         from random import choice
 
@@ -29,7 +29,7 @@ class TestData:
         data.update(contact_id, asdict(contact))
         assert Contact(**data.data[contact_id]) == contact, "Обновленная запись не равна эталонной!"
 
-    @pytest.mark.part_3
+    @pytest.mark.model
     def test_delete(self, data_filled: Data):
         from random import choice
 
