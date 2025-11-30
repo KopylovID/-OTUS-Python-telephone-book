@@ -45,9 +45,13 @@ class Data:
         del self.data[idx]
         return idx
 
-    def find(self) -> None:
+    def find(self, attr_name:str, find_str:str) -> Dict:
         """Функция поиска определенного контакта"""
-        pass
+        result_data: Dict = dict()
+        for id, entity in self.data.items():
+            if str(entity[attr_name]).find(find_str) != -1:
+                result_data[id] = entity
+        return result_data
 
     def set_action(self, ixd: int):
         """Функция устанавливающая идентификатор текущего выбранного контакта"""

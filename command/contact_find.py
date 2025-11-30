@@ -23,14 +23,10 @@ class ContactFind(Command):
         :return: None
         """
 
-        # TODO: На данный момент поиск происходит в контроллере, но лучше искать через модель
         LOG.debug(f"Запуск команды {self.description}")
 
         name = self.view.get_params()
-        data: Dict = dict()
-        for id, contact in self.data.data.items():
-            if str(contact["name"]).find(name) != -1:
-                data[id] = contact
+        data: Dict = self.data.find("name", name)
 
         if data:
             self.view.contact_show(data)
