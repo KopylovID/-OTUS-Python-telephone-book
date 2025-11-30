@@ -40,3 +40,19 @@ class TestData:
         contact_amount_after = len(data.data)
         assert contact_amount_before - contact_amount_after == 1, "Количество записей не изменилось!"
         assert data.data.get(contact_id) is None, "Запись не была удалена!"
+
+    @pytest.mark.debug
+    @pytest.mark.parametrize('attr_name, find_str, expectation', [
+        ('name', 'Корица', 1),
+        ('phone', '+7-777-777-77-77', 1),
+        ('name', 'Петрович', 0)
+    ])
+    def test_find(self, data_filled: Data, attr_name:str, find_str:str, expectation: int):
+        data = data_filled
+
+        result_data: Data = Data()
+        for key, value in data.find(attr_name, find_str).items():
+            contact = Contact(*value)
+            result_data.insert(asdict(contact))
+
+        assert len(result_data.data) == expectation

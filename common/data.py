@@ -5,9 +5,10 @@ from typing import Dict
 class Data:
     """Класс для работы с данными телефонного справочника"""
 
-    __data: Dict = dict()
-    __data_seq: int = 0
-    __action_id: int = 0
+    def __init__(self):
+        self.__data: Dict = dict()
+        self.__data_seq: int = 0
+        self.__action_id: int = 0
 
     @property
     def seq_values(self):
@@ -49,7 +50,7 @@ class Data:
         """Функция поиска определенного контакта"""
         result_data: Dict = dict()
         for id, entity in self.data.items():
-            if str(entity[attr_name]).find(find_str) != -1:
+            if str(entity.get(attr_name, '')).find(find_str) != -1:
                 result_data[id] = entity
         return result_data
 
